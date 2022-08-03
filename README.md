@@ -15,3 +15,8 @@ The only required config values are `BotToken` and `BotPrefix`. The bot does hav
 
 ## Command-line flags
 Each config value has a flag which **will override your specified config values**. These flags are `guild`, `token`, `prefix`, and `rmcmd`.
+
+Example to set the `rmcmd/RemoveCommands` flag which will remove all commands on shutdown
+```
+go run main.go -rmcmd
+```
