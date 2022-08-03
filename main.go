@@ -26,7 +26,7 @@ func init() {
 	config.Init(*GuildID, *BotToken, *BotPrefix, *RemoveCommands)
 	log.Println("Initialized config")
 
-    commands.Init(bot.Session)
+    	commands.Init(bot.Session)
 	log.Println("Initialized commands")
 
 	bot.Init()
