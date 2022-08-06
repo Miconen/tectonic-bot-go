@@ -20,17 +20,17 @@ var (
 func init() {
 	log.Println("Initializing...")
 
+	log.Println("Parsing flags...")
     flag.Parse()
-	log.Println("Parsed flags")
 
+	log.Println("Initializing config")
 	config.Init(*GuildID, *BotToken, *BotPrefix, *RemoveCommands)
-	log.Println("Initialized config")
 
+	log.Println("Initializing commands")
     commands.Init(bot.Session)
-	log.Println("Initialized commands")
 
+	log.Println("Initializing bot")
 	bot.Init()
-	log.Println("Initialized bot")
 }
 
 func main() {

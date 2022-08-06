@@ -26,22 +26,22 @@ type configStruct struct {
 func Init(guild string, token string, prefix string, rmcmd bool) {
     err := read(guild, token, prefix , rmcmd)
     if err != nil {
-        log.Fatalf("Error reading config file: %v", err)
+        log.Fatalf("    Error reading config file: %v", err)
     }
 }
 
 func read(guild string, token string, prefix string, rmcmd bool) error {
-    log.Println("Reading config file...")
+    log.Println("   Reading config file...")
     file, err := ioutil.ReadFile("./config.json")
 
     if err != nil {
-        log.Fatalf("Couldn't read config file: %v", err)
+        log.Fatalf("    Couldn't read config file: %v", err)
         return err
     }
 
     err = json.Unmarshal(file, &config)
     if err != nil {
-        log.Fatalf("Unmarshaling error: %v", err)
+        log.Fatalf("    Unmarshaling error: %v", err)
     }
 
     BotToken, err = strCoalesce(prefix)
@@ -68,7 +68,7 @@ func read(guild string, token string, prefix string, rmcmd bool) error {
 func strCoalesce(s string) (string, error) {
     empty := ""
     if s == empty {
-        return s, errors.New("Empty string")
+        return s, errors.New("  Empty string")
     }
     return s, nil
 

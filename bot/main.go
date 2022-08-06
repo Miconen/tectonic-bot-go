@@ -45,12 +45,12 @@ func Init() {
 	var err error
 	Session, err = discordgo.New("Bot " + config.BotToken)
 	if err != nil {
-		log.Fatalf("Invalid bot parameters: %v", err)
+		log.Fatalf("	Invalid bot parameters: %v", err)
 	}
     
     u, err := Session.User("@me")
     if err != nil {
-        log.Fatalf("Failed to make bot a user: %v", err)
+        log.Fatalf("	Failed to make bot a user: %v", err)
         return
     }
 
@@ -67,22 +67,22 @@ func Init() {
 
 	Session.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
 		
-		log.Printf("Logged in as: %v#%v", BotUsername, BotDiscriminator)
+		log.Printf("	Logged in as: %v#%v", BotUsername, BotDiscriminator)
 	})
 }
 
 func Start() {
 	err := Session.Open()
 	if err != nil {
-		log.Fatalf("Cannot open the session: %v", err)
+		log.Fatalf("	Cannot open the session: %v", err)
 	}
 
-	log.Println("Adding commands...")
+	log.Println("	Adding commands...")
 	registeredCommands := make([]*discordgo.ApplicationCommand, len(commands.List))
 	for i, v := range commands.List {
 		cmd, err := Session.ApplicationCommandCreate(BotID, config.GuildID, v)
 		if err != nil {
-			log.Panicf("Cannot create '%v' command: %v", v.Name, err)
+			log.Panicf("		Cannot create '%v' command: %v", v.Name, err)
 		}
 		registeredCommands[i] = cmd
 	}
@@ -99,7 +99,7 @@ func Start() {
 		for _, v := range registeredCommands {
 			err := Session.ApplicationCommandDelete(BotID, config.GuildID, v.ID)
 			if err != nil {
-				log.Panicf("Cannot delete '%v' command: %v", v.Name, err)
+				log.Panicf("	Cannot delete '%v' command: %v", v.Name, err)
 			}
 		}
 	}

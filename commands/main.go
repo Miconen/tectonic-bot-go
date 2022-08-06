@@ -13,6 +13,8 @@ var (
     // Handlers for registered commands
     Handlers map[string]func(session *discordgo.Session, i *discordgo.InteractionCreate)
 
+    // Temporary array for commands to add themselves in and where we will fetch them from
+    CommandStorage []*CommandOptions
 )
 
 type CommandOptions struct {
@@ -21,20 +23,26 @@ type CommandOptions struct {
     f func(s *discordgo.Session, i *discordgo.InteractionCreate)
 }
 
-func RegisterCommand(co CommandOptions) {
-    c := &discordgo.ApplicationCommand{
-        Name: co.Name,
-        Description: co.Description,
+func AddCommand(command *CommandOptions) {
+    ListEntry := &discordgo.ApplicationCommand{
+        Name: command.Name,
+        Description: command.Description,
     }
-    List = append(List, c)
+    List = append(List, ListEntry)
 
-    Handlers[co.Name] = co.f
+    Handlers[command.Name] = command.f
 
-    log.Println("Added command: " + co.Name)
+    log.Println("   Added command: " + command.Name)
+}
+
+func AddCommands() {
+    for i := range CommandStorage {
+        AddCommand(CommandStorage[i])
+    } 
 }
 
 func Init(s *discordgo.Session) {
     // Handlers for registered commands
     Handlers = make(map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate))
-    RegisterCommand(basicCommand())
+    AddCommands()
 }
