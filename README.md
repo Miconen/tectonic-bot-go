@@ -1,5 +1,5 @@
 # tectonic-bot-go
-Attempt at learning Go by rewriting my tectonic-bot project.
+Attempt at learning Go by rewriting my tectonic-bot project. Currently in a working state but not as fleshed out as this repos tectonic-bot counterpart written in TypeScript.
 
 ## Config (required)
 **The bot requires you to create a config.json file with the structure specified below.**
